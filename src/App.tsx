@@ -13,7 +13,7 @@ function App() {
                                     VolcanoYT
                                 </span>
                                 <span className="block text-white flex items-center gap-4">
-                                    Mobile <span className="text-base px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full border border-yellow-500/50 align-middle">Beta</span>
+                                    App <span className="text-base px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full border border-yellow-500/50 align-middle">Beta</span>
                                 </span>
                             </h1>
                             <p className="mt-4 text-xl text-gray-300 max-w-2xl">
@@ -22,41 +22,32 @@ function App() {
                             <div className="mt-8 flex flex-col sm:flex-row gap-4">
                                 <a
                                     href="#"
-                                    className="px-8 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg hover:from-orange-600 hover:to-red-700 transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center transform hover:scale-105"
-                                >
-                                    <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                    </svg>
-                                    Download .APK
-                                </a>
-                                <a
-                                    href="https://app.volcanoyt.com"
                                     className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
                                 >
-                                    Open Web App
+                                    Android App
+                                </a>
+                                <a
+                                    href="https://volcanoyt.com"
+                                    className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
+                                >
+                                    Web Portal
                                 </a>
                                 <a
                                     href="https://map.volcanoyt.com"
                                     className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
                                 >
-                                    Live Map
+                                    Web Maps
                                 </a>
                             </div>
                         </div>
                         {/* Hero Image Mockup */}
                         <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
                             <div className="relative rounded-2xl shadow-2xl bg-slate-800/50 border border-slate-700 p-2 overflow-hidden aspect-[9/16] lg:aspect-auto h-[600px] flex items-center justify-center">
-                                <div className="text-center p-4">
-                                    <div className="w-24 h-24 mx-auto mb-4 bg-cyan-500/20 rounded-full flex items-center justify-center animate-pulse">
-                                        <div className="w-16 h-16 bg-cyan-500/40 rounded-full flex items-center justify-center">
-                                            <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <p className="text-gray-400">App Screenshot Placeholder</p>
-                                    <p className="text-sm text-gray-500 mt-2">(Replace with actual screenshot)</p>
-                                </div>
+                                <img
+                                    src="/logo.png"
+                                    alt="VolcanoYT Logo"
+                                    className="w-full h-full object-cover rounded-xl"
+                                />
                             </div>
                         </div>
                     </div>
@@ -176,20 +167,26 @@ Interface {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
                     <div className="mb-8 md:mb-0 text-center md:text-left">
                         <h3 className="text-2xl font-bold text-white mb-2">VolcanoYT</h3>
-                        <p className="text-gray-400 text-sm">Open Source Disaster Monitoring</p>
+                        <p className="text-gray-400 text-sm">Disaster Monitoring</p>
                     </div>
                     <div className="flex space-x-6">
-                        <a href="https://volcanoyt.com" className="text-gray-400 hover:text-white transition-colors">
-                            VolcanoYT.com
-                        </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://github.com/VolcanoYT" className="text-gray-400 hover:text-white transition-colors">
                             GitHub
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                            Discord
+                        <a href="https://www.facebook.com/volcanoytz" className="text-gray-400 hover:text-white transition-colors">
+                            Facebook
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                            Privacy Policy
+                        <a href="https://twitter.com/VolcanoYTz" className="text-gray-400 hover:text-white transition-colors">
+                            Twitter (X)
+                        </a>
+                        <a href="https://www.youtube.com/@VolcanoYT" className="text-gray-400 hover:text-white transition-colors">
+                            YouTube
+                        </a>
+                        <a href="https://t.me/VolcanoYT" className="text-gray-400 hover:text-white transition-colors">
+                            Telegram
+                        </a>
+                        <a href="https://www.instagram.com/volcanoytz" className="text-gray-400 hover:text-white transition-colors">
+                            Instagram
                         </a>
                     </div>
                 </div>
