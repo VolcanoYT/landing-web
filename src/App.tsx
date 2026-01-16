@@ -1,25 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+    const [webMapVersion, setWebMapVersion] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchVersion = async () => {
+            try {
+                const response = await fetch(`https://map.volcanoyt.com/version.json?t=${Date.now()}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.version) {
+                        setWebMapVersion(data.version);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch web map version", error);
+            }
+        };
+
+        fetchVersion();
+        const interval = setInterval(fetchVersion, 3600000); // Check every hour
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="min-h-screen bg-dark text-white font-sans">
             {/* Hero Section */}
+            {/* Hero Section */}
             <header className="relative overflow-hidden bg-gradient-to-b from-slate-900 to-dark">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
-                    <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-                        <div className="mb-12 lg:mb-0">
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-                                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
+                    <div className="flex flex-col items-center justify-center text-center">
+                        {/* Hero Image Mockup - Top Center - Simplified & Smaller */}
+                        <div className="relative mb-8 w-40 h-40 sm:w-48 sm:h-48">
+                            <div className="relative w-full h-full flex items-center justify-center">
+                                <img
+                                    src="/logo.png"
+                                    alt="VolcanoYT Logo"
+                                    className="w-full h-full object-contain drop-shadow-2xl"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="max-w-4xl mx-auto">
+                            <h1 className="text-4xl sm:text-5xl lg:text-3xl font-extrabold tracking-tight mb-6 flex items-center justify-center gap-4">
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600 text-6xl lg:text-7xl">
                                     VolcanoYT
                                 </span>
-                                <span className="block text-white flex items-center gap-4">
-                                    App <span className="text-base px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full border border-yellow-500/50 align-middle">Beta</span>
+                                <span className="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full border border-yellow-500/50 text-base font-bold uppercase tracking-wider self-center mt-2">
+                                    Beta
                                 </span>
                             </h1>
-                            <p className="mt-4 text-xl text-gray-300 max-w-2xl">
+                            <p className="mt-4 text-xl text-gray-300 max-w-2xl mx-auto">
                                 Earthquakes, Volcanoes, Weather, and more. The all-in-one disaster monitoring network.
                             </p>
-                            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                                 <a
                                     href="#"
                                     className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
@@ -37,17 +71,10 @@ function App() {
                                     className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
                                 >
                                     Web Maps
+                                    {webMapVersion && (
+                                        <span className="ml-2 text-xs text-slate-400 font-normal">v{webMapVersion}</span>
+                                    )}
                                 </a>
-                            </div>
-                        </div>
-                        {/* Hero Image Mockup */}
-                        <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                            <div className="relative rounded-2xl shadow-2xl bg-slate-800/50 border border-slate-700 p-2 overflow-hidden aspect-[9/16] lg:aspect-auto h-[600px] flex items-center justify-center">
-                                <img
-                                    src="/logo.png"
-                                    alt="VolcanoYT Logo"
-                                    className="w-full h-full object-cover rounded-xl"
-                                />
                             </div>
                         </div>
                     </div>
@@ -55,7 +82,7 @@ function App() {
             </header>
 
             {/* Value Proposition */}
-            <section className="py-20 bg-dark">
+            <section className="py-5 bg-dark">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl font-bold text-white mb-4">Why VolcanoYT?</h2>
