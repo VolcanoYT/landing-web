@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
     const [webMapVersion, setWebMapVersion] = useState<string | null>(null);
+    const [androidAppVersion, setAndroidAppVersion] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchVersion = async () => {
+        const fetchVersions = async () => {
+            // Fetch Web Map Version
             try {
                 const response = await fetch(`https://map.volcanoyt.com/version.json?t=${Date.now()}`);
                 if (response.ok) {
@@ -16,10 +18,23 @@ function App() {
             } catch (error) {
                 console.error("Failed to fetch web map version", error);
             }
+
+            // Fetch Android App Version
+            try {
+                const response = await fetch(`https://file2.yuuki.me/p/Local_EU/App/Android/VolcanoYT/version.json?alist_ts=${Math.random()}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.versionName) { // Assuming format is { versionName: "x.y.z", versionCode: 123 }
+                        setAndroidAppVersion(data.versionName);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch android app version", error);
+            }
         };
 
-        fetchVersion();
-        const interval = setInterval(fetchVersion, 3600000); // Check every hour
+        fetchVersions();
+        const interval = setInterval(fetchVersions, 3600000); // Check every hour
         return () => clearInterval(interval);
     }, []);
 
@@ -53,26 +68,29 @@ function App() {
                             <p className="mt-4 text-xl text-gray-300 max-w-2xl mx-auto">
                                 Earthquakes, Volcanoes, Weather, and more. The all-in-one disaster monitoring network.
                             </p>
-                            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-stretch">
                                 <a
-                                    href="#"
-                                    className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
+                                    href={`https://file2.yuuki.me/p/Local_EU/App/Android/VolcanoYT/volcanoyt.apk?v=${androidAppVersion}`}
+                                    className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex flex-col items-center justify-center min-w-[160px]"
                                 >
-                                    Android App
+                                    <span>Android App</span>
+                                    {androidAppVersion && (
+                                        <span className="text-xs text-slate-400 font-normal leading-none mt-1">v{androidAppVersion}</span>
+                                    )}
                                 </a>
                                 <a
                                     href="https://volcanoyt.com"
-                                    className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
+                                    className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center min-w-[160px]"
                                 >
                                     Web Portal
                                 </a>
                                 <a
-                                    href="https://map.volcanoyt.com"
-                                    className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex items-center justify-center"
+                                    href={`https://map.volcanoyt.com?v=${webMapVersion}`}
+                                    className="px-8 py-3 rounded-lg bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex flex-col items-center justify-center min-w-[160px]"
                                 >
-                                    Web Maps
+                                    <span>Web Maps</span>
                                     {webMapVersion && (
-                                        <span className="ml-2 text-xs text-slate-400 font-normal">v{webMapVersion}</span>
+                                        <span className="text-xs text-slate-400 font-normal leading-none mt-1">v{webMapVersion}</span>
                                     )}
                                 </a>
                             </div>
