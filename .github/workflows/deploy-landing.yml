@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'landing-web/**'
 
 jobs:
   deploy:
@@ -23,15 +21,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        working-directory: ./landing-web
         run: npm ci
 
       - name: Build
-        working-directory: ./landing-web
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./landing-web/dist
+          publish_dir: ./dist
