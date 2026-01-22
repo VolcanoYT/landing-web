@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 function App() {
     const [webMapVersion, setWebMapVersion] = useState<string | null>(null);
     const [androidAppVersion, setAndroidAppVersion] = useState<string | null>(null);
+    const [apiVersion, setApiVersion] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchVersions = async () => {
@@ -30,6 +31,19 @@ function App() {
                 }
             } catch (error) {
                 console.error("Failed to fetch android app version", error);
+            }
+
+            // Fetch API Version
+            try {
+                const response = await fetch(`https://api.volcanoyt.com/version?t=${Date.now()}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.version) {
+                        setApiVersion(data.version);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch API version", error);
             }
         };
 
@@ -80,6 +94,17 @@ function App() {
                                     )}
                                 </a>
                                 <a
+                                    href={`https://map.volcanoyt.com?v=${webMapVersion}`}
+                                    className="px-6 py-3 rounded-xl bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex flex-col items-center justify-center min-w-[160px] shadow-lg shadow-black/20"
+                                >
+                                    <span className="leading-tight">Web Maps</span>
+                                    {webMapVersion ? (
+                                        <span className="text-xs text-slate-400 font-normal leading-none mt-1.5 px-2 py-0.5 bg-slate-900/50 rounded-full">v{webMapVersion}</span>
+                                    ) : (
+                                        <div className="h-4"></div>
+                                    )}
+                                </a>
+                                <a
                                     href="https://volcanoyt.com"
                                     className="px-6 py-3 rounded-xl bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex flex-col items-center justify-center min-w-[160px] shadow-lg shadow-black/20"
                                 >
@@ -87,12 +112,12 @@ function App() {
                                     <div className="h-4"></div>
                                 </a>
                                 <a
-                                    href={`https://map.volcanoyt.com?v=${webMapVersion}`}
+                                    href="https://api.volcanoyt.com"
                                     className="px-6 py-3 rounded-xl bg-slate-800 text-white font-semibold text-lg hover:bg-slate-700 transition-all border border-slate-700 flex flex-col items-center justify-center min-w-[160px] shadow-lg shadow-black/20"
                                 >
-                                    <span className="leading-tight">Web Maps</span>
-                                    {webMapVersion ? (
-                                        <span className="text-xs text-slate-400 font-normal leading-none mt-1.5 px-2 py-0.5 bg-slate-900/50 rounded-full">v{webMapVersion}</span>
+                                    <span className="leading-tight">API</span>
+                                    {apiVersion ? (
+                                        <span className="text-xs text-slate-400 font-normal leading-none mt-1.5 px-2 py-0.5 bg-slate-900/50 rounded-full">v{apiVersion}</span>
                                     ) : (
                                         <div className="h-4"></div>
                                     )}
